@@ -11,8 +11,15 @@ class Auth extends CI_Controller
 		$this->load->model('UsersModel');
 	}
 
+	public function index(){
+		redirect('auth/login');
+	}
+
 	public function login()
 	{
+		if(authentic()){
+			redirect('home');
+		}
 		if ($_POST) {
 			$this->setLoginValidationRules();
 			if ($this->form_validation->run() == TRUE) {
@@ -38,6 +45,9 @@ class Auth extends CI_Controller
 
 	public function register()
 	{
+		if(authentic()){
+			redirect('home');
+		}
 		if ($_POST) {
 			$this->setRegisterValidationRules();
 			if ($this->form_validation->run() == TRUE) {
@@ -55,8 +65,9 @@ class Auth extends CI_Controller
 					}else{
 						redirect('home');
 					}
+				}else{
+					redirect('auth/register');
 				}
-				redirect('auth/register');
 			} else {
 				$this->load->view('auth/register');
 			}

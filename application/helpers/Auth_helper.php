@@ -11,24 +11,32 @@ if ( ! function_exists('authentic'))
 	function authentic()
 	{
 		$CI =& get_instance();
-		$authUser = $CI->session->userdata('userSessionData');
+		$authUser =  $CI->session->userdata('userSessionData');
 		if($authUser){
 			return (object) $authUser;
 		}else{
 			return FALSE;
 		}
 	}
-
+}
+if ( ! function_exists('isAdmin')) {
 	function isAdmin()
 	{
 		$CI =& get_instance();
 		$CI->load->model('UsersModel');
 		$authUser = $CI->session->userdata('userSessionData');
-		$userRoles = $CI->UsersModel->userRoles($authUser->id);
-		if(in_array('admin', $userRoles)){
-			return TRUE;
+		if($authUser){
+			$authUser = (object) $authUser;
+			$userRoles = $CI->UsersModel->userRoles($authUser->id);
+			if (in_array('admin', $userRoles)) {
+				return TRUE;
+			} else {
+				return FALSE;
+			}
 		}else{
 			return FALSE;
 		}
+
 	}
 }
+
