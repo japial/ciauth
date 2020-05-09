@@ -17,9 +17,6 @@ class Auth extends CI_Controller
 
 	public function login()
 	{
-		if(authentic()){
-			redirect('home');
-		}
 		if ($_POST) {
 			$this->setLoginValidationRules();
 			if ($this->form_validation->run() == TRUE) {
@@ -45,9 +42,6 @@ class Auth extends CI_Controller
 
 	public function register()
 	{
-		if(authentic()){
-			redirect('home');
-		}
 		if ($_POST) {
 			$this->setRegisterValidationRules();
 			if ($this->form_validation->run() == TRUE) {
