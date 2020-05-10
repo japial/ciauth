@@ -13,6 +13,12 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$data['user'] = authentic();
-		$this->load->view('home', $data);
+		$this->load->view('user/home', $data);
+	}
+
+	public function profile()
+	{
+		$data['user'] = authentic();
+		$this->load->view('user/profile', $data);
 	}
 }

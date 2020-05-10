@@ -23,11 +23,7 @@ class Auth extends CI_Controller
 				$userData = $this->UsersModel->authentication($this->input->post('email'), $this->input->post('password'));
 				if($userData){
 					$this->session->set_userdata('userSessionData', $userData);
-					if(isAdmin()){
-						redirect('admin');
-					}else{
-						redirect('home');
-					}
+					$this->userRedirection();
 				}else{
 					$data['failed'] = TRUE;
 					$this->load->view('auth/login', $data);
@@ -54,11 +50,7 @@ class Auth extends CI_Controller
 				if ($userData['id']) {
 					unset($userData['password']);
 					$this->session->set_userdata('userSessionData', $userData);
-					if(isAdmin()){
-						redirect('admin');
-					}else{
-						redirect('home');
-					}
+					$this->userRedirection();
 				}else{
 					redirect('auth/register');
 				}
@@ -74,6 +66,20 @@ class Auth extends CI_Controller
 	{
 		$this->session->unset_userdata('userSessionData');
 		redirect('auth/login');
+	}
+
+	private function userRedirection(){
+		$redirectUrl = $this->session->userdata('redirectUrl');
+		if($redirectUrl){
+			$this->session->set_userdata('redirectUrl', '');
+			redirect($redirectUrl);
+		}else if(isSuperAdmin()){
+			redirect('superadmin');
+		}else if(isAdmin()){
+			redirect('admin');
+		}else{
+			redirect('home');
+		}
 	}
 
 	private function setRegisterValidationRules()

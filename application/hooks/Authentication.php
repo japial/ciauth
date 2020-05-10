@@ -24,7 +24,7 @@ class Authentication
 			if ($this->CI->router->fetch_class() == 'welcome') {
 				//do nothing
 			} else if ($this->CI->router->fetch_class() != 'auth') {
-				$this->CI->session->set_userdata("redirect_url", $this->CI->uri->uri_string());
+				$this->CI->session->set_userdata('redirectUrl', $this->CI->uri->uri_string());
 				redirect("auth/login");
 			}
 		}

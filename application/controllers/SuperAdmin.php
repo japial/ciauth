@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class SuperAdmin extends CI_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
-		if(!isSuperAdmin() && !isAdmin()){
+		if(!isSuperAdmin()){
 			redirect('home');
 		}
 	}
@@ -14,6 +14,6 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$data['user'] = authentic();
-		$this->load->view('admin/home', $data);
+		$this->load->view('super/home', $data);
 	}
 }

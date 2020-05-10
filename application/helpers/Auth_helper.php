@@ -36,7 +36,26 @@ if ( ! function_exists('isAdmin')) {
 		}else{
 			return FALSE;
 		}
+	}
+}
 
+if ( ! function_exists('isSuperAdmin')) {
+	function isSuperAdmin()
+	{
+		$CI =& get_instance();
+		$CI->load->model('UsersModel');
+		$authUser = $CI->session->userdata('userSessionData');
+		if($authUser){
+			$authUser = (object) $authUser;
+			$userRoles = $CI->UsersModel->userRoles($authUser->id);
+			if (in_array('super_admin', $userRoles)) {
+				return TRUE;
+			} else {
+				return FALSE;
+			}
+		}else{
+			return FALSE;
+		}
 	}
 }
 
