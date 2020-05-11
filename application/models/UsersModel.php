@@ -12,6 +12,15 @@ class UsersModel extends CI_Model
 		return $this->db->get()->row();
 	}
 
+	public function authentication($email, $password){
+		$user = $this->userByEmail($email);
+		if($user && $user->password == md5($password)){
+			return $this->find($user->id);
+		}else{
+			return FALSE;
+		}
+	}
+
 	public function userByEmail($email)
 	{
 		$this->db->select('id, name, email, password');
@@ -33,18 +42,14 @@ class UsersModel extends CI_Model
 		}
 	}
 
-	public function updateUserInfo($id, $info){
+	public function updateUserInfo($id, $data){
 		$this->db->where('id', $id);
-		$this->db->update('users', $info);
+		$this->db->update('users', $data);
 	}
 
-	public function authentication($email, $password){
-		$user = $this->userByEmail($email);
-		if($user && $user->password == md5($password)){
-			return $this->find($user->id);
-		}else{
-			return FALSE;
-		}
+	public function updateUserPassword($id, $data){
+		$this->db->where('id', $id);
+		$this->db->update('users', $data);
 	}
 
 	public function userRoles($userId){

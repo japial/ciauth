@@ -41,17 +41,29 @@
 					Change Password
 				</div>
 				<div class="card-body">
-					<form method="POST" action="<?= base_url('profile/password') ?>">
+					<form method="POST" action="<?= base_url('profile/change_password') ?>">
+						<div class="form-group">
+							<label>Current Password</label>
+							<input type="password" name="current_password" class="form-control" required>
+							<?php if(form_error('current_password')){ ?>
+								<small class="form-text text-danger"><?= form_error('current_password') ?></small>
+							<?php } ?>
+							<?php if($this->session->flashdata('passwordError')){ ?>
+								<small class="text-danger text-center">
+									<?= $this->session->flashdata('passwordError') ?>
+								</small>
+							<?php } ?>
+						</div>
 						<div class="form-group">
 							<label>Password</label>
-							<input type="password" name="password" class="form-control">
+							<input type="password" name="password" class="form-control" required>
 							<?php if(form_error('password')){ ?>
 								<small class="form-text text-danger"><?= form_error('password') ?></small>
 							<?php } ?>
 						</div>
 						<div class="form-group">
 							<label>Password Confirmation</label>
-							<input type="password" name="password_confirmation" class="form-control">
+							<input type="password" name="password_confirmation" class="form-control" required>
 							<?php if(form_error('password_confirmation')){ ?>
 								<small class="form-text text-danger"><?= form_error('password_confirmation') ?></small>
 							<?php } ?>

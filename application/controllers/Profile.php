@@ -38,6 +38,25 @@ class Profile extends CI_Controller {
 		}
 	}
 
+	public function change_password(){
+		$authUser = authentic();
+		$this->setPasswordValidationRules();
+		if ($this->form_validation->run() == TRUE) {
+			$correctPassword = $this->UsersModel->authentication($authUser->email, $this->input->post('current_password'));
+			if($correctPassword){
+				$userData['password'] = strip_tags($this->input->post('password'));
+				$this->UsersModel->updateUserPassword($authUser->id, $userData);
+				$this->session->set_flashdata('success', 'Your Password Updated');
+			}else{
+				$this->session->set_flashdata('passwordError', 'Current Password Not Matched');
+			}
+			redirect('profile');
+		} else {
+			$data['user'] = $this->UsersModel->find($authUser->id);
+			$this->load->view('profile/user', $data);
+		}
+	}
+
 	private function emailAvailable($userEmail, $updatedEmail){
 		if($userEmail == $updatedEmail){
 			return TRUE;
@@ -63,6 +82,28 @@ class Profile extends CI_Controller {
 				'field' => 'email',
 				'label' => 'Email',
 				'rules' => 'trim|required|valid_email'
+			)
+		);
+		$this->form_validation->set_rules($config);
+	}
+
+	private function setPasswordValidationRules()
+	{
+		$config = array(
+			array(
+				'field' => 'current_password',
+				'label' => 'Current Password',
+				'rules' => 'trim|required'
+			),
+			array(
+				'field' => 'password',
+				'label' => 'Password',
+				'rules' => 'trim|required|min_length[8]'
+			),
+			array(
+				'field' => 'password_confirmation',
+				'label' => 'Password Confirmation',
+				'rules' => 'trim|required|matches[password]'
 			)
 		);
 		$this->form_validation->set_rules($config);
