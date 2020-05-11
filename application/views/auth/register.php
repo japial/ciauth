@@ -7,28 +7,28 @@
 				<form method="POST" action="<?= base_url('auth/register') ?>">
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" name="name" value="<?= set_value('name'); ?>" class="form-control">
+						<input type="text" name="name" value="<?= set_value('name'); ?>" class="form-control" required>
 						<?php if(form_error('name')){ ?>
 							<small class="form-text text-danger"><?= form_error('name') ?></small>
 						<?php } ?>
 					</div>
 					<div class="form-group">
 						<label>Email</label>
-						<input type="email" name="email" value="<?= set_value('email'); ?>" class="form-control">
+						<input type="email" name="email" value="<?= set_value('email'); ?>" class="form-control" required>
 						<?php if(form_error('email')){ ?>
 							<small class="form-text text-danger"><?= form_error('email') ?></small>
 						<?php } ?>
 					</div>
 					<div class="form-group">
 						<label>Password</label>
-						<input type="password" name="password" class="form-control">
+						<input type="password" name="password" class="form-control" required>
 						<?php if(form_error('password')){ ?>
 							<small class="form-text text-danger"><?= form_error('password') ?></small>
 						<?php } ?>
 					</div>
 					<div class="form-group">
 						<label>Password Confirmation</label>
-						<input type="password" name="password_confirmation" class="form-control">
+						<input type="password" name="password_confirmation" class="form-control" required>
 						<?php if(form_error('password_confirmation')){ ?>
 							<small class="form-text text-danger"><?= form_error('password_confirmation') ?></small>
 						<?php } ?>

@@ -20,6 +20,24 @@ class UsersModel extends CI_Model
 		return $this->db->get()->row();
 	}
 
+	public function isUserEmailAvailable($email)
+	{
+		$this->db->select('id');
+		$this->db->from('users');
+		$this->db->where('email', $email);
+		$exist = $this->db->get()->row();
+		if($exist){
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	}
+
+	public function updateUserInfo($id, $info){
+		$this->db->where('id', $id);
+		$this->db->update('users', $info);
+	}
+
 	public function authentication($email, $password){
 		$user = $this->userByEmail($email);
 		if($user && $user->password == md5($password)){

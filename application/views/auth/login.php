@@ -7,14 +7,14 @@
 				<form method="POST" action="<?= base_url('auth/login') ?>">
 					<div class="form-group">
 						<label>Email</label>
-						<input type="email" name="email" value="<?= set_value('email'); ?>" class="form-control">
+						<input type="email" name="email" value="<?= set_value('email'); ?>" class="form-control" required>
 						<?php if(form_error('email')){ ?>
 							<small class="form-text text-danger"><?= form_error('email') ?></small>
 						<?php } ?>
 					</div>
 					<div class="form-group">
 						<label>Password</label>
-						<input type="password" name="password" class="form-control">
+						<input type="password" name="password" class="form-control" required>
 						<?php if(form_error('password')){ ?>
 							<small class="form-text text-danger"><?= form_error('password') ?></small>
 						<?php } ?>
