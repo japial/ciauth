@@ -30,19 +30,18 @@ class UsersModel extends CI_Model
 	}
 
 	public function userRoles($userId){
-		$this->db->select('roles.name');
+		$this->db->select('role');
 		$this->db->from('user_roles');
-		$this->db->join('roles','roles.id = user_roles.role_id');
-		$this->db->where('user_roles.user_id', $userId);
+		$this->db->where('user_id', $userId);
 		$roles = $this->db->get()->result();
 		$userRoles = array();
 		foreach ($roles as $role){
-			$userRoles[] = $role->name;
+			$userRoles[] = $role->role;
 		}
 		return $userRoles;
 	}
 
-	public function createUser($userData, $role = 1){
+	public function createUser($userData, $role = 'user'){
 		$this->db->insert('users', $userData);
 		$userID = $this->db->insert_id();
 		$this->createUserRole($userID, $role);
@@ -51,7 +50,7 @@ class UsersModel extends CI_Model
 
 	public function createUserRole($userID, $role){
 		$userRole['user_id'] = $userID;
-		$userRole['role_id'] = $role;
+		$userRole['role'] = $role;
 		$this->db->insert('user_roles', $userRole);
 	}
 }

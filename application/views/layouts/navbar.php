@@ -23,6 +23,9 @@
 			</li>
 			<?php }else{ ?>
 				<li class="nav-item active">
+					<a class="nav-link" href="<?= base_url('profile') ?>">Profile</a>
+				</li>
+				<li class="nav-item active">
 					<a class="nav-link" href="<?= base_url('auth/logout') ?>">Logout</a>
 				</li>
 			<?php } ?>

@@ -48,7 +48,7 @@ if ( ! function_exists('isSuperAdmin')) {
 		if($authUser){
 			$authUser = (object) $authUser;
 			$userRoles = $CI->UsersModel->userRoles($authUser->id);
-			if (in_array('super_admin', $userRoles)) {
+			if (in_array('super', $userRoles)) {
 				return TRUE;
 			} else {
 				return FALSE;

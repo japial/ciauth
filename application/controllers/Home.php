@@ -15,10 +15,4 @@ class Home extends CI_Controller {
 		$data['user'] = authentic();
 		$this->load->view('user/home', $data);
 	}
-
-	public function profile()
-	{
-		$data['user'] = authentic();
-		$this->load->view('user/profile', $data);
-	}
 }

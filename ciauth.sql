@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2020 at 10:12 PM
+-- Generation Time: May 11, 2020 at 10:54 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -20,27 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `ciauth`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `roles`
---
-
-CREATE TABLE `roles` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `roles`
---
-
-INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'user', '2020-05-01 02:29:28', '2020-05-01 02:29:28'),
-(2, 'admin', '2020-05-01 02:29:28', '2020-05-01 02:29:28');
 
 -- --------------------------------------------------------
 
@@ -66,7 +45,7 @@ CREATE TABLE `users` (
 CREATE TABLE `user_roles` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
+  `role` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -74,13 +53,6 @@ CREATE TABLE `user_roles` (
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `users`
@@ -98,12 +70,6 @@ ALTER TABLE `user_roles`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
