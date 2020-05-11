@@ -64,6 +64,27 @@ class UsersModel extends CI_Model
 		return $userRoles;
 	}
 
+	public function lastPasswordResetTime($email){
+		$this->db->select('created_at');
+		$this->db->from('password_resets');
+		$this->db->where('email', $email);
+		$this->db->order_by('id', 'DESC');
+		$this->db->limit(1);
+		return $this->db->get()->row();
+	}
+
+	public function createPasswordReset($data){
+		$data['created_at'] = date('Y-m-d H:i:s');
+		$this->db->insert('password_resets', $data);
+	}
+
+	public function passwordResetToken($token){
+		$this->db->select('email, created_at');
+		$this->db->from('password_resets');
+		$this->db->where('token', $token);
+		return $this->db->get()->row();
+	}
+
 	public function createUser($userData, $role = 'user'){
 		$this->db->insert('users', $userData);
 		$userID = $this->db->insert_id();

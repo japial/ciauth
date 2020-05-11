@@ -14,16 +14,18 @@ class Authentication
 	public function check()
 	{
 		$authUser =  $this->CI->session->userdata('userSessionData');
+		$fetchedClass = $this->CI->router->fetch_class();
 		if ($authUser) {
-			if ($this->CI->router->fetch_class() == 'auth') {
+			if ($fetchedClass == 'auth') {
 				if ($this->CI->router->fetch_method() != 'logout') {
 					redirect("home");
 				}
 			}
 		} else {
-			if ($this->CI->router->fetch_class() == 'welcome') {
-				//do nothing
-			} else if ($this->CI->router->fetch_class() != 'auth') {
+			$guestClasses = array('welcome',  'forgot');
+			if (in_array($fetchedClass, $guestClasses)) {
+				return;
+			} else if ($fetchedClass != 'auth') {
 				$this->CI->session->set_userdata('redirectUrl', $this->CI->uri->uri_string());
 				redirect("auth/login");
 			}

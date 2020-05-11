@@ -44,7 +44,7 @@ class Profile extends CI_Controller {
 		if ($this->form_validation->run() == TRUE) {
 			$correctPassword = $this->UsersModel->authentication($authUser->email, $this->input->post('current_password'));
 			if($correctPassword){
-				$userData['password'] = strip_tags($this->input->post('password'));
+				$userData['password'] = md5(strip_tags($this->input->post('password')));
 				$this->UsersModel->updateUserPassword($authUser->id, $userData);
 				$this->session->set_flashdata('success', 'Your Password Updated');
 			}else{
