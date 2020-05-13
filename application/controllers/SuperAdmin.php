@@ -14,6 +14,6 @@ class SuperAdmin extends CI_Controller {
 	public function index()
 	{
 		$data['user'] = authentic();
-		$this->load->view('super/home', $data);
+		renderView('super/home', $data);
 	}
 }

@@ -12,7 +12,7 @@ class Profile extends CI_Controller {
 	{
 		$authUser = authentic();
 		$data['user'] = $this->UsersModel->find($authUser->id);
-		$this->load->view('profile/user', $data);
+		renderView('profile/user', $data);
 	}
 
 	public function update()
@@ -34,7 +34,7 @@ class Profile extends CI_Controller {
 			redirect('profile');
 		} else {
 			$data['user'] = $this->UsersModel->find($authUser->id);
-			$this->load->view('profile/user', $data);
+			renderView('profile/user', $data);
 		}
 	}
 
@@ -53,7 +53,7 @@ class Profile extends CI_Controller {
 			redirect('profile');
 		} else {
 			$data['user'] = $this->UsersModel->find($authUser->id);
-			$this->load->view('profile/user', $data);
+			renderView('profile/user', $data);
 		}
 	}
 

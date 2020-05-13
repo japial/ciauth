@@ -11,7 +11,7 @@ class Forgot extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('auth/forgot');
+		renderView('auth/forgot');
 	}
 
 	public function send_email(){
@@ -29,10 +29,10 @@ class Forgot extends CI_Controller {
 				redirect('forgot');
 			}else{
 				$data['failed'] = TRUE;
-				$this->load->view('auth/forgot', $data);
+				renderView('auth/forgot', $data);
 			}
 		} else {
-			$this->load->view('auth/forgot');
+			renderView('auth/forgot');
 		}
 	}
 
@@ -48,11 +48,11 @@ class Forgot extends CI_Controller {
 				redirect('auth/login');
 			}else{
 				$this->session->set_flashdata('error', 'Invalid Request');
-				$this->load->view('auth/reset');
+				renderView('auth/reset');
 			}
 		} else {
 			$data['token'] = $this->input->post('token');
-			$this->load->view('auth/reset', $data);
+			renderView('auth/reset', $data);
 		}
 	}
 
@@ -63,7 +63,7 @@ class Forgot extends CI_Controller {
 				$difference = time() - strtotime($resetToken->created_at);
 				if($difference < 900) {
 					$data['token'] = $token;
-					$this->load->view('auth/reset', $data);
+					renderView('auth/reset', $data);
 				}else{
 					$this->session->set_flashdata('timeError', 'Time Expired');
 					redirect('forgot');
@@ -80,7 +80,7 @@ class Forgot extends CI_Controller {
 
 	private function makePasswordReset($email){
 		$data['email'] = $email;
-		$data['token'] = $this->generateRandomString(32);
+		$data['token'] = generateRandomString(32);
 		$lastTime = $this->UsersModel->lastPasswordResetTime($email);
 		if($lastTime){
 			$difference = time() - strtotime($lastTime->created_at);
@@ -120,17 +120,6 @@ class Forgot extends CI_Controller {
 		$this->email->message($message);
 		$this->email->send();
 		return TRUE;
-	}
-
-	private function generateRandomString($length = 10)
-	{
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$charactersLength = strlen($characters);
-		$randomString = '';
-		for ($i = 0; $i < $length; $i++) {
-			$randomString .= $characters[rand(0, $charactersLength - 1)];
-		}
-		return $randomString;
 	}
 
 	private function setPasswordValidationRules()

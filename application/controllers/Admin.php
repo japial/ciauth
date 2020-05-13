@@ -14,6 +14,6 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$data['user'] = authentic();
-		$this->load->view('admin/home', $data);
+		renderView('admin/home', $data);
 	}
 }

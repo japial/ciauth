@@ -1,4 +1,3 @@
-<?php $this->load->view('layouts/header');?>
 <div class="row">
 	<div class="col-md-6 mx-auto py-5">
 		<div class="card">
@@ -36,4 +35,3 @@
 		</div>
 	</div>
 </div>
-<?php $this->load->view('layouts/footer');?>

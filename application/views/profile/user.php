@@ -1,4 +1,3 @@
-<?php $this->load->view('layouts/header');?>
 	<div class="row">
 		<div class="col-md-8 mx-auto py-2">
 			<?php if($this->session->flashdata('success')){ ?>
@@ -26,9 +25,9 @@
 								<small class="form-text text-danger"><?= form_error('email') ?></small>
 							<?php } ?>
 							<?php if($this->session->flashdata('emailError')){ ?>
-							<small class="text-danger text-center">
-								<?= $this->session->flashdata('emailError') ?>
-							</small>
+								<small class="text-danger text-center">
+									<?= $this->session->flashdata('emailError') ?>
+								</small>
 							<?php } ?>
 						</div>
 						<button type="submit" class="btn btn-primary float-right">Update</button>
@@ -74,4 +73,3 @@
 			</div>
 		</div>
 	</div>
-<?php $this->load->view('layouts/footer');?>

@@ -25,13 +25,13 @@ class Auth extends CI_Controller
 					$this->userRedirection();
 				}else{
 					$data['failed'] = TRUE;
-					$this->load->view('auth/login', $data);
+					renderView('auth/login', $data);
 				}
 			} else {
-				$this->load->view('auth/login');
+				renderView('auth/login');
 			}
 		} else {
-			$this->load->view('auth/login');
+			renderView('auth/login');
 		}
 	}
 
@@ -54,10 +54,10 @@ class Auth extends CI_Controller
 					redirect('auth/register');
 				}
 			} else {
-				$this->load->view('auth/register');
+				renderView('auth/register');
 			}
 		} else {
-			$this->load->view('auth/register');
+			renderView('auth/register');
 		}
 	}
 
